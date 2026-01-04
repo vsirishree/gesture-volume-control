@@ -1,0 +1,22 @@
+import serial
+import time
+import pyautogui
+
+# Make sure this matches your Arduino port
+ser = serial.Serial('COM7', 9600)
+
+print("Listening for hand gestures... ✋")
+
+while True:
+    if ser.in_waiting:
+        command = ser.readline().decode().strip()
+
+        if command == "UP":
+            pyautogui.press("volumeup")
+            print("Volume UP 🔊")
+
+        elif command == "DOWN":
+            pyautogui.press("volumedown")
+            print("Volume DOWN 🔉")
+
+    time.sleep(0.2)
